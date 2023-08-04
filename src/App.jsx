@@ -1,14 +1,20 @@
 import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+
 import "./App.css";
+import SearchBar from "./SearchBar";
+import ImageList from "./ImageList";
+import searchImages from "./api";
 
 function App() {
-  const [count, setCount] = useState(0);
-
+  const [images, setImages] = useState([]);
+  const handleSubmit = async (term) => {
+    const result = await searchImages(term);
+    setImages(result);
+  };
   return (
     <>
-      <div>hi</div>
+      <SearchBar formSubmit={handleSubmit} />
+      <ImageList images={images} />
     </>
   );
 }
